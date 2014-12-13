@@ -6,8 +6,8 @@ class Dorm(models.Model):
     room_numbers = models.IntegerField(default=0)
     faculty = models.CharField(max_length=40)
     description = models.TextField()
-    picture = models.FileField()
-    # fiefield
+    picture = models.FileField(upload_to = 'uploads')
+
 
 class Room(models.Model):
     number = models.CharField(max_length=10)
@@ -32,6 +32,7 @@ class Student(models.Model):
     grade = models.IntegerField(default=0)
     social_case = models.BooleanField(default=False) # social cases are treated separately
     year = models.IntegerField(default=1)
+    selfie = models.FileField(upload_to = 'uploads')
 
 #    previous_room = models.ForeignKey(Room, related_name='last_year_students') # crashes with current_room
     current_room = models.ForeignKey('Room', related_name='this_year_students', null=True)
@@ -43,4 +44,4 @@ class Student(models.Model):
 
 
 class Document(models.Model):
-    file = models.FileField()
+    file = models.FileField(upload_to = 'uploads')
