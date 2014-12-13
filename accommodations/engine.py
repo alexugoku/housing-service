@@ -8,5 +8,12 @@ sorted_social_case_students = sorted(social_case_students, key=lambda student:st
 
 sorted_students = sorted(students, key=lambda student:student.grade) # sort the students
 
-for i in room_numbers:
-    
+
+dorms = Dorm.objects.all()
+
+for d in dorms:
+    for r in d.room_set.all(): # r.number returneaza din Room
+        normal_dorms[d.name[r.number]] = r.size
+
+#for ss in sorted_students:
+#    normal_dorms[]
