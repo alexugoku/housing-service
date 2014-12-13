@@ -4,10 +4,11 @@ from django.db import models
 class Dorm(models.Model):
     name = models.CharField(max_length=40)
     room_numbers = models.IntegerField(default=0)
-    faculty = models.CharField(max_length=40)
+    faculty = models.CharField('Faculty', max_length=40)
     description = models.TextField()
     picture = models.FileField(upload_to = 'uploads')
-
+    map_latitude = models.FloatField(('Latitude'), blank=True, null=True)
+    map_longitude = models.FloatField(('Longitude'), blank=True, null=True)
 
 class Room(models.Model):
     number = models.CharField(max_length=10)
