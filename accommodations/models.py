@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractBaseUser
 
 class Dorm(models.Model):
     name = models.CharField(max_length=40)
@@ -27,7 +27,7 @@ class Application(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='New')
     comment = models.TextField()
 
-class Student(models.Model):
+class Student(AbstractBaseUser):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     city = models.CharField(max_length=30)
@@ -41,6 +41,7 @@ class Student(models.Model):
 #    previous_room = models.ForeignKey(Room, related_name='last_year_students') # crashes with current_room
     current_room = models.ForeignKey('Room', related_name='this_year_students', null=True)
 
+    USERNAME_FIELD = 'email'
 
     def __unicode__(self):
         return u'%s %s' % (self.first_name, self.last_name)
