@@ -44,7 +44,7 @@ def create_dorm(request):
     context = {
         'camin_form': camin_form,
     }
-    return render(request, 'admin_panel.html', context)
+    return render(request, 'create_dorm.html', context)
 
 @login_required
 def create_student(request):
@@ -58,13 +58,13 @@ def create_student(request):
     context = {
         'student_form': student_form,
     }
-    return render(request, 'admin_panel.html', context)
+    return render(request, 'create_student.html', context)
 
 @login_required
 def admin_panel(request):
-    applications = Application.objects.all
+    applications = Application.objects.all()
     context = {
-        'app': applications,
+        'applications': applications,
     }
     return render(request, 'admin_panel.html', context)
 

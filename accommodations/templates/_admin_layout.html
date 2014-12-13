@@ -20,18 +20,9 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav pull-left">
-                <li><a href="{% url 'index' %}">Dashboard</a></li>
-                <li>
-                     <a class="dropdown-toggle"  id="dropdownMenu1" data-toggle="dropdown" href="" >
-                           Camine
-                        <span class="caret"></span>
-                      </a>
-                      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        {% for camin in camine %}
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'camine' %}">{{camin.name}}</a></li>
-                        {% endfor %}
-                      </ul>
-                 </li>
+                <li><a href="{% url 'admin_panel' %}">Admin panel</a></li>
+                 <li><a href="{% url 'create_dorm' %}">Create dorm</a></li>
+                 <li><a href="{% url 'create_student' %}">Create student</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="#">{{user.username}}</a></li>
                 <li><a href="{% url 'logout' %}">Log Out</a></li>
