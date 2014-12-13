@@ -9,10 +9,28 @@ from accommodations.models import Dorm
 
 
 @login_required
+def admin_panel(request):
+    dorms = Dorm.objects.all()
+    if request.method == 'GET':
+        camin_form = DormForm()
+    elif request.method == 'POST':
+        camin_form = DormForm(request.POST)
+        if camin_form.is_valid():
+            camin_form.save()
+            return redirect('index')
+    context = {
+        'posts': dorms,
+        'camin_form': camin_form,
+    }
+    return render(request, 'admin_panel.html', context)
+
+
+@login_required
 def index(request):
     form = ApplicationForm()
     context = {
-        'form': form
+        'app_form': form,
+        'camin_form': DormForm
     }
     return render(request, 'index.html', context)
 

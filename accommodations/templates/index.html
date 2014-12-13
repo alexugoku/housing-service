@@ -1,14 +1,12 @@
 {% extends '_layout.html' %}
 
 {% block content %}
-  <h1>Welcome!!!</h1>
-
-  <h1>Cerere!!!</h1>\\{{ form.as_p }}
-  <!--<form class="form-horizontal" method="POST">
+<div>
+  <form class="form-horizontal" method="POST">
     {% csrf_token %}
     <div class="form-group">
       <div class="col-sm-9">
-        {{ form.text }}
+        {{ app_form.as_p }}
       </div>
       <div class="col-sm-3">
         <button class="btn btn-primary btn-block" type="submit">
@@ -17,7 +15,8 @@
       </div>
     </div>
   </form>
-
+</div>
+<!--
   <div class="posts">
   {% for post in posts %}
     <div class="media">
