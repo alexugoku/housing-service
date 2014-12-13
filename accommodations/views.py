@@ -12,7 +12,7 @@ from accommodations.models import Dorm
 def index(request):
     form = ApplicationForm()
     context = {
-        'form': form
+        'app_form': form
     }
     return render(request, 'index.html', context)
 
@@ -22,7 +22,7 @@ def camine(request):
     dorms = Dorm.objects.all()
     form = DormForm()
     context = {
-        'form': form,
+        'dorm_form': form,
         'dorms': dorms,
     }
     return render(request, 'camine.html', context)
