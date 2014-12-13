@@ -33,7 +33,7 @@ class Student(AbstractBaseUser):
     city = models.CharField(max_length=30)
     county = models.CharField(max_length=30)
     address = models.CharField(max_length=60)
-    email = models.EmailField()
+    email = models.EmailField(max_length=40, unique=True)
     grade = models.IntegerField(default=0)
     social_case = models.BooleanField(default=False) # social cases are treated separately
     year = models.IntegerField(default=1)
