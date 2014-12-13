@@ -30,7 +30,7 @@
                      </a>
                      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                         {% for camin in camine %}
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'camine' %}">{{camin.name}}</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'camine' camin.name %}">{{camin.name}}</a></li>
                         {% endfor %}
                      </ul>
                 </li>
