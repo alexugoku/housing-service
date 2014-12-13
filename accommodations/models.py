@@ -25,6 +25,7 @@ class Application(models.Model):
     STATUS = ('New', 'Saved', 'Sent', 'Seen', 'Rejected', 'Accepted')
     STATUS_CHOICES = zip(STATUS,STATUS)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='New')
+    comment = models.TextField()
 
 class Student(models.Model):
     first_name = models.CharField(max_length=30)
@@ -37,7 +38,6 @@ class Student(models.Model):
     social_case = models.BooleanField(default=False) # social cases are treated separately
     year = models.IntegerField(default=1)
     selfie = models.FileField(upload_to = 'uploads')
-    comment = models.TextField()
 #    previous_room = models.ForeignKey(Room, related_name='last_year_students') # crashes with current_room
     current_room = models.ForeignKey('Room', related_name='this_year_students', null=True)
 
