@@ -15,6 +15,7 @@ for d in dorms:
     for r in d.room_set.all(): # r.number returneaza din Room
         normal_dorms[d.name[r.number]] = r.size
 
+
 for ss in sorted_students:
-    for od in ss.dorm_set.all():
-        
+    for od in ss.application_set.all():
+        if(normal_dorms[od.]
