@@ -21,14 +21,8 @@ class Application(models.Model):
     dorms = models.OneToOneField(Dorm)
     student = models.OneToOneField('Student')
     attachments = models.ManyToManyField('Document')
-    STATUS_CHOICES = (
-        ('New', 'New'),
-        ('Saved', 'Saved'),
-        ('Sent', 'Sent'),
-        ('Seen', 'Seen'),
-        ('Rejected', 'Rejected'),
-        ('Accepted', 'Accepted'),
-    )
+    STATUS = ('New', 'Saved', 'Sent', 'Seen', 'Rejected', 'Accepted')
+    STATUS_CHOICES = zip(STATUS,STATUS)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='New')
 
 class Student(models.Model):
