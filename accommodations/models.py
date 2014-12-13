@@ -5,16 +5,22 @@ class Dorm(models.Model):
     name = models.CharField(max_length=40)
     room_numbers = models.IntegerField(default=0)
     faculty = models.CharField(max_length=40)
+    description = models.TextField()
+    picture = models.FileField()
+    # fiefield
 
 class Room(models.Model):
-    number = models.IntegerField(default=0)
+    number = models.CharField(max_length=10)
     size = models.IntegerField(default=0)
+    floor = models.IntegerField(default=0)
 
-    accomodation = models.ForeignKey(Dorm)
+    dorm = models.ForeignKey(Dorm)
 
 class Application(models.Model):
     publication_date = models.DateTimeField()
     dorms = models.OneToOneField(Dorm)
+    student = models.OneToOneField('Student')
+    attachments = models.ManyToManyField('Document')
 
 class Student(models.Model):
     first_name = models.CharField(max_length=30)
@@ -27,8 +33,8 @@ class Student(models.Model):
     social_case = models.BooleanField(default=False) # social cases are treated separately
     year = models.IntegerField(default=1)
 
-#    previous_room = models.ForeignKey(Room) # crashes with current_room
-    current_room = models.ForeignKey(Room)
+#    previous_room = models.ForeignKey(Room, related_name='last_year_students') # crashes with current_room
+    current_room = models.ForeignKey('Room', related_name='this_year_students', null=True)
 
 
     def __unicode__(self):
@@ -36,5 +42,5 @@ class Student(models.Model):
 
 
 
-class Documents(models.Model):
-    student = models.ForeignKey(Student)
+class Document(models.Model):
+    file = models.FileField()
