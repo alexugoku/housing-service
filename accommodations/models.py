@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.utils import timezone
@@ -15,7 +14,10 @@ class Dorm(models.Model):
     map_latitude = models.FloatField('Latitude', blank=True, null=True)
     map_longitude = models.FloatField('Longitude', blank=True, null=True)
 
-    application_dorms = models.ForeignKey('Application')
+    application_dorms = models.ForeignKey('Application', blank=True, null=True)
+
+    def __unicode__(self):
+        return self.name
 
 
 class Room(models.Model):
@@ -73,19 +75,19 @@ class Student(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
 
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    city = models.CharField(max_length=30)
-    county = models.CharField(max_length=30)
-    address = models.CharField(max_length=60)
+    first_name = models.CharField(max_length=30, blank=True, null=True)
+    last_name = models.CharField(max_length=30, blank=True, null=True)
+    city = models.CharField(max_length=30, blank=True, null=True)
+    county = models.CharField(max_length=30, blank=True, null=True)
+    address = models.CharField(max_length=60, blank=True, null=True)
     email = models.EmailField(max_length=40, unique=True, blank=True)
     grade = models.IntegerField(default=0)
     social_case = models.BooleanField(default=False)  # social cases are treated separately
     year = models.IntegerField(default=1)
-    selfie = models.FileField(upload_to='uploads')
+    selfie = models.FileField(upload_to='uploads', blank=True, null=True)
     # previous_room = models.ForeignKey(Room, related_name='last_year_students') # crashes with current_room
 
-    current_room = models.ForeignKey('Room', related_name='this_year_students', null=True)
+    current_room = models.ForeignKey('Room', related_name='this_year_students', blank=True, null=True)
 
     USERNAME_FIELD = 'email'
     objects = UserManager()
@@ -95,7 +97,6 @@ class Student(AbstractBaseUser):
 
     def has_perm(self, *args):
         return True
-
 
     def get_full_name(self):
         return self.first_name

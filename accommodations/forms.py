@@ -22,14 +22,16 @@ class UserProfileForm(Form):
 class ApplicationForm(ModelForm):
     class Meta:
         model = Application
-        exclude = ('password', 'last_login', )
+        exclude = ('password', 'last_login', 'status')
 
 
 class StudentForm(ModelForm):
     class Meta:
         model = Student
+        exclude = ('password', 'last_login', 'is_active', 'is_superuser','is_staff')
 
 
 class DormForm(ModelForm):
     class Meta:
         model = Dorm
+        exclude = ('application_dorms',)

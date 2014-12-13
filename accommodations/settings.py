@@ -91,4 +91,4 @@ AUTH_USER_MODEL = 'accommodations.Student'
 
 STATIC_URL = '/static/'
 
-
+MEDIA_URL = '/media/'

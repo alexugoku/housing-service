@@ -3,15 +3,25 @@
 {% block content %}
 
 
-    <table class="table">
-        <ul>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Student</th>
+        <th>Data</th>
+        <th>Status</th>
+    </tr>
+    </thead>
 
-  {% for app in applications %}
+    {% for app in applications %}
 
-        <li>{{ app }}</li>
+    <tr>
+        <td>{{ app.student.get_full_name|default:app.student.email }}</td>
+        <td>{{ app.publication_date.date }}</td>
+        <td>{{ app.status }}</td>
+    </tr>
 
-  {% endfor %}
-            </ul>
-        </table>
+    {% endfor %}
+
+</table>
 
 {%endblock%}
