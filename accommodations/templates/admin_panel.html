@@ -2,12 +2,16 @@
 
 {% block content %}
 
-<div class="posts">
+
+    <table class="table">
+        <ul>
+
   {% for app in applications %}
-    <div>
-        {{ app }}}
-    </div>
+
+        <li>{{ app }}</li>
+
   {% endfor %}
- </div>
+            </ul>
+        </table>
 
 {%endblock%}
