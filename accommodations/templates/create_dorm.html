@@ -1,0 +1,17 @@
+{% extends '_admin_layout.html' %}
+
+{% block content %}
+
+    <form class="form-horizontal" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <div class="col-sm-9">
+        <table class="table">{{ camin_form.as_table }}</table>
+          <button class="btn btn-primary btn-block" type="submit">
+          Post
+        </button>
+      </div>
+     </div>
+  </form>
+
+{%endblock%}

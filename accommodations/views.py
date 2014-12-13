@@ -4,13 +4,36 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from accommodations.forms import (
     UserLogin,
-    ApplicationForm, DormForm)
-from accommodations.models import Dorm
+    ApplicationForm, DormForm, StudentForm)
+from accommodations.models import Dorm, Student, Application
+from django.db import models
 
+
+# @login_required
+#def attach_files(request, name):
+#    if request.method == 'GET':
+#        form = models.FileField(upload_to='uploads')
+#    elif request.method == 'POST':
+#        form = models.FileField(upload_to='uploads')
+#        if form.is_valid():
+#            cleaned_data = form.cleaned_data
+#            comment = UserPostComment(text=cleaned_data['text'],
+#                                      post=post,
+#                                      author=request.user)
+#            comment.save()
+#
+#    comments = UserPostComment.objects.filter(post=post)
+#
+#    context = {
+#        'post': post,
+#        'comments': comments,
+#        'form': form,
+#    }
+#
+#    return render(request, 'post_details.html', context)
 
 @login_required
-def admin_panel(request):
-    dorms = Dorm.objects.all()
+def create_dorm(request):
     if request.method == 'GET':
         camin_form = DormForm()
     elif request.method == 'POST':
@@ -19,25 +42,49 @@ def admin_panel(request):
             camin_form.save()
             return redirect('index')
     context = {
-        'posts': dorms,
         'camin_form': camin_form,
     }
     return render(request, 'admin_panel.html', context)
 
+@login_required
+def create_student(request):
+    if request.method == 'GET':
+        student_form = StudentForm()
+    elif request.method == 'POST':
+        student_form = StudentForm(request.POST)
+        if student_form.is_valid():
+            student_form.save()
+            return redirect('index')
+    context = {
+        'student_form': student_form,
+    }
+    return render(request, 'admin_panel.html', context)
 
 @login_required
-def index(request):
-    form = ApplicationForm()
+def admin_panel(request):
+    app = Application.objects.get(all)
+
     context = {
-        'app_form': form,
-        'camin_form': DormForm
+        'app': app,
     }
     return render(request, 'index.html', context)
 
 
 @login_required
-def camine(request):
-    dorms = Dorm.objects.all()
+def index(request):
+    form = ApplicationForm()
+    app = Application.objects.get(pk=request.user.pk)
+
+    context = {
+        'app': app,
+        'app_form': form,
+    }
+    return render(request, 'index.html', context)
+
+
+@login_required
+def camine(request, nume):
+    dorms = Dorm.objects.get(name=nume)
     form = DormForm()
     context = {
         'form': form,

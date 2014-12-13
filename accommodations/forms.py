@@ -25,6 +25,11 @@ class ApplicationForm(ModelForm):
         exclude = ('password', 'last_login', )
 
 
+class StudentForm(ModelForm):
+    class Meta:
+        model = Student
+
+
 class DormForm(ModelForm):
     class Meta:
         model = Dorm
