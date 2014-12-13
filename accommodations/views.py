@@ -62,18 +62,18 @@ def create_student(request):
 
 @login_required
 def admin_panel(request):
-    app = Application.objects.get(all)
-
+    applications = Application.objects.all
     context = {
-        'app': app,
+        'app': applications,
     }
-    return render(request, 'index.html', context)
+    return render(request, 'admin_panel.html', context)
 
 
 @login_required
 def index(request):
     form = ApplicationForm()
-    app = Application.objects.get(pk=request.user.pk)
+
+    app = Application.objects.filter(pk=request.user.pk).first()
 
     context = {
         'app': app,
