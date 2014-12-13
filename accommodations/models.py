@@ -4,10 +4,11 @@ from django.db import models
 class Dorm(models.Model):
     name = models.CharField(max_length=40)
     room_numbers = models.IntegerField(default=0)
-    faculty = models.CharField(max_length=40)
+    faculty = models.CharField('Faculty', max_length=40)
     description = models.TextField()
     picture = models.FileField(upload_to = 'uploads')
-
+    map_latitude = models.FloatField(('Latitude'), blank=True, null=True)
+    map_longitude = models.FloatField(('Longitude'), blank=True, null=True)
 
 class Room(models.Model):
     number = models.CharField(max_length=10)
@@ -21,6 +22,9 @@ class Application(models.Model):
     dorms = models.OneToOneField(Dorm)
     student = models.OneToOneField('Student')
     attachments = models.ManyToManyField('Document')
+    STATUS = ('New', 'Saved', 'Sent', 'Seen', 'Rejected', 'Accepted')
+    STATUS_CHOICES = zip(STATUS,STATUS)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='New')
 
 class Student(models.Model):
     first_name = models.CharField(max_length=30)
@@ -33,7 +37,7 @@ class Student(models.Model):
     social_case = models.BooleanField(default=False) # social cases are treated separately
     year = models.IntegerField(default=1)
     selfie = models.FileField(upload_to = 'uploads')
-
+    comment = models.TextField()
 #    previous_room = models.ForeignKey(Room, related_name='last_year_students') # crashes with current_room
     current_room = models.ForeignKey('Room', related_name='this_year_students', null=True)
 
