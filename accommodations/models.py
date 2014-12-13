@@ -1,3 +1,4 @@
+from django.contrib import admin
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 
@@ -6,7 +7,7 @@ class Dorm(models.Model):
     room_numbers = models.IntegerField(default=0)
     faculty = models.CharField('Faculty', max_length=40)
     description = models.TextField()
-    picture = models.FileField(upload_to = 'uploads')
+    picture = models.FileField(upload_to='uploads', blank=True)
     map_latitude = models.FloatField(('Latitude'), blank=True, null=True)
     map_longitude = models.FloatField(('Longitude'), blank=True, null=True)
 
@@ -50,3 +51,6 @@ class Student(AbstractBaseUser):
 
 class Document(models.Model):
     file = models.FileField(upload_to = 'uploads')
+
+
+admin.site.register(Dorm)

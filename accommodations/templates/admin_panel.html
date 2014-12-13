@@ -1,0 +1,18 @@
+{% extends '_layout.html' %}
+
+{% block content %}
+  <form class="form-horizontal" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <div class="col-sm-9">
+        {{camin_form.as_p}}
+      </div>
+
+      <div class="col-sm-3">
+        <button class="btn btn-primary btn-block" type="submit">
+          Post
+        </button>
+      </div>
+    </div>
+  </form>
+ {%endblock%}
