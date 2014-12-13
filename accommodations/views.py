@@ -73,7 +73,7 @@ def admin_panel(request):
 @login_required
 def index(request):
     form = ApplicationForm()
-    app = Application.objects.get(pk=request.user.pk)
+    app = Application.objects.filter(pk=request.user.pk).first
 
     context = {
         'app': app,
