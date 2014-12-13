@@ -84,11 +84,11 @@ def index(request):
 
 @login_required
 def camine(request, nume):
-    dorms = Dorm.objects.get(name=nume)
+    dorm = Dorm.objects.get(name=nume)
     form = DormForm()
     context = {
         'form': form,
-        'dorms': dorms,
+        'dorm': dorm,
     }
     return render(request, 'camine.html', context)
 

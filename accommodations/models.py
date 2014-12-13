@@ -11,9 +11,9 @@ class Dorm(models.Model):
     social_room_numbers = models.IntegerField(default=0)  # rooms for social cases
     faculty = models.CharField('Faculty', max_length=40)
     description = models.TextField()
-    picture = models.FileField(upload_to='uploads')
-    map_latitude = models.FloatField(('Latitude'), blank=True, null=True)
-    map_longitude = models.FloatField(('Longitude'), blank=True, null=True)
+    picture = models.FileField(upload_to='uploads', blank=True)
+    map_latitude = models.FloatField('Latitude', blank=True, null=True)
+    map_longitude = models.FloatField('Longitude', blank=True, null=True)
 
     application_dorms = models.ForeignKey('Application')
 
@@ -37,7 +37,7 @@ class Application(models.Model):
     comment = models.TextField()
 
     def __unicode__(self):
-        return u'%s %s %s' % (self.student, self.publication_date, self.status)
+        return u'%s %s @ %s' % (self.status, self.student, self.publication_date)
 
 
 class UserManager(BaseUserManager):
