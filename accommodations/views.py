@@ -6,17 +6,16 @@ from accommodations.forms import (
     UserLogin,
 )
 
+
 @login_required
 def index(request):
+    # cererea apare tot aici
     return render(request, 'index.html', {})
+
 
 @login_required
 def camine(request):
-    return render(request, '_layout_camin.html', {})
-
-@login_required
-def cerere(request):
-    return render(request, 'cerere.html', {})
+    return render(request, 'camine.html', {})
 
 
 def login_view(request):
