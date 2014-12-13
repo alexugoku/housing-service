@@ -32,9 +32,9 @@ class Application(models.Model):
     comment = models.TextField() # comments to be sent to the admin
 
     publication_date = models.DateTimeField()  # application pub_date
-    dorm1 = models.ForeignKey(Dorm)
-    dorm2 = models.ForeignKey(Dorm)
-    dorm3 = models.ForeignKey(Dorm)
+    dorm1 = models.ForeignKeyField(Dorm)
+    dorm2 = models.ForeignKeyField(Dorm)
+    dorm3 = models.ForeignKeyField(Dorm)
     #dorms = models.OneToOneField(Dorm) # de ce? strike 1!
     student = models.OneToOneField('Student') # one student has one application
 
