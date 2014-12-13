@@ -4,18 +4,28 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from accommodations.forms import (
     UserLogin,
-)
+    ApplicationForm, DormForm)
+from accommodations.models import Dorm
 
 
 @login_required
 def index(request):
-    # cererea apare tot aici
-    return render(request, 'index.html', {})
+    form = ApplicationForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'index.html', context)
 
 
 @login_required
 def camine(request):
-    return render(request, 'camine.html', {})
+    dorms = Dorm.objects.all()
+    form = DormForm()
+    context = {
+        'form': form,
+        'dorms': dorms,
+    }
+    return render(request, 'camine.html', context)
 
 
 def login_view(request):

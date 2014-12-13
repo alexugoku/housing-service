@@ -2,8 +2,9 @@ from django.forms import (
     Form, CharField, Textarea, PasswordInput, ChoiceField, DateField,
     ImageField,
 )
+from django.forms import ModelForm
+from accommodations.models import Student, Dorm
 
-# from fb.models import UserProfile
 
 class UserLogin(Form):
     username = CharField(max_length=30)
@@ -16,3 +17,13 @@ class UserProfileForm(Form):
     # gender = ChoiceField(choices=UserProfile.GENDERS, required=False)
     date_of_birth = DateField(required=False)
     avatar = ImageField(required=False)
+
+
+class ApplicationForm(ModelForm):
+    class Meta:
+        model = Student
+
+
+class DormForm(ModelForm):
+    class Meta:
+        model = Dorm
