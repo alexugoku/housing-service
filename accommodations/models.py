@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.utils import timezone
 
 
 class Dorm(models.Model):
@@ -26,7 +27,7 @@ class Room(models.Model):
 
 
 class Application(models.Model):
-    publication_date = models.DateTimeField()
+    publication_date = models.DateTimeField(auto_now_add=True)
     # dorms = models.OneToOneField(Dorm) # de ce? strike 1!
     student = models.OneToOneField('Student')
     attachments = models.ManyToManyField('Document', blank=True)
