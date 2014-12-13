@@ -3,7 +3,7 @@ from django.forms import (
     ImageField,
 )
 from django.forms import ModelForm
-from accommodations.models import Student, Dorm
+from accommodations.models import Student, Dorm, Application
 
 
 class UserLogin(Form):
@@ -21,7 +21,8 @@ class UserProfileForm(Form):
 
 class ApplicationForm(ModelForm):
     class Meta:
-        model = Student
+        model = Application
+        exclude = ('password', 'last_login', )
 
 
 class DormForm(ModelForm):
