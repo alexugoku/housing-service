@@ -21,7 +21,8 @@
             <li><a href="{% url 'camine' %}">Camine</a></li>
             <li><a href="{% url 'cerere' %}">Cerere</a></li>
           {% if user.is_authenticated %}
-            <li><a href="{% url 'profile' user.username %}">My profile</a></li>
+            <!--<li><a href="{% url 'profile' user.username %}">My profile</a></li>-->
+            <li>{{user.username}}</li>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
           {% endif %}
           </ul>

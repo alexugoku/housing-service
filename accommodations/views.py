@@ -2,17 +2,22 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from accommodations.forms import (
+    UserLogin,
+)
 
+@login_required
 def index(request):
     return render(request, 'index.html', {})
 
-
+@login_required
 def camine(request):
     return render(request, '_layout_camin.html', {})
 
-
+@login_required
 def cerere(request):
     return render(request, 'cerere.html', {})
+
 
 def login_view(request):
     if request.method == 'GET':
