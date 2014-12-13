@@ -37,7 +37,7 @@ class Student(models.Model):
     social_case = models.BooleanField(default=False) # social cases are treated separately
     year = models.IntegerField(default=1)
     selfie = models.FileField(upload_to = 'uploads')
-
+    comment = models.TextField()
 #    previous_room = models.ForeignKey(Room, related_name='last_year_students') # crashes with current_room
     current_room = models.ForeignKey('Room', related_name='this_year_students', null=True)
 
