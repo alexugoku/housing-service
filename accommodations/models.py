@@ -3,12 +3,15 @@ from django.contrib.auth.models import AbstractBaseUser
 
 class Dorm(models.Model):
     name = models.CharField(max_length=40)
-    room_numbers = models.IntegerField(default=0)
+    room_numbers = models.IntegerField(default=0) # classic rooms
+    social_room_numbers = model.IntegerField(default=0) # rooms for social cases
     faculty = models.CharField('Faculty', max_length=40)
     description = models.TextField()
-    picture = models.FileField(upload_to = 'uploads')
+    picture = models.FileField(upload_to='uploads')
     map_latitude = models.FloatField(('Latitude'), blank=True, null=True)
     map_longitude = models.FloatField(('Longitude'), blank=True, null=True)
+
+    application_dorms = models.ForeignKey('Application')
 
 class Room(models.Model):
     number = models.CharField(max_length=10)
@@ -19,7 +22,7 @@ class Room(models.Model):
 
 class Application(models.Model):
     publication_date = models.DateTimeField()
-    dorms = models.OneToOneField(Dorm)
+    #dorms = models.OneToOneField(Dorm) # de ce? strike 1!
     student = models.OneToOneField('Student')
     attachments = models.ManyToManyField('Document')
     STATUS = ('New', 'Saved', 'Sent', 'Seen', 'Rejected', 'Accepted')
@@ -37,8 +40,9 @@ class Student(AbstractBaseUser):
     grade = models.IntegerField(default=0)
     social_case = models.BooleanField(default=False) # social cases are treated separately
     year = models.IntegerField(default=1)
-    selfie = models.FileField(upload_to = 'uploads')
+    selfie = models.FileField(upload_to='uploads')
 #    previous_room = models.ForeignKey(Room, related_name='last_year_students') # crashes with current_room
+
     current_room = models.ForeignKey('Room', related_name='this_year_students', null=True)
 
     USERNAME_FIELD = 'email'
@@ -49,4 +53,4 @@ class Student(AbstractBaseUser):
 
 
 class Document(models.Model):
-    file = models.FileField(upload_to = 'uploads')
+    file = models.FileField(upload_to='uploads')
