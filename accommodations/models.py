@@ -7,7 +7,7 @@ class Dorm(models.Model):
 
     name = models.CharField(max_length=40) # name of the Dorm
     room_numbers = models.IntegerField(default=0) # no of classic rooms
-    social_room_numbers = model.IntegerField(default=0) # no of rooms for social cases
+    social_room_numbers = models.IntegerField(default=0) # no of rooms for social cases
     faculty = models.CharField('Faculty', max_length=40) # Faculty which has students here
     description = models.TextField()  # dorm description
     picture = models.FileField(upload_to='uploads') # picture of the dorm
