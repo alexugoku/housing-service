@@ -36,6 +36,10 @@ class Application(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='New')
     comment = models.TextField()
 
+    dorm1 = models.ForeignKey(Dorm, related_name='first_option')
+    dorm2 = models.ForeignKey(Dorm, related_name='2nd_option')
+    dorm3 = models.ForeignKey(Dorm, related_name='3rd_option')
+
     def __unicode__(self):
         return u'%s %s %s' % (self.student, self.publication_date, self.status)
 
